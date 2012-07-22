@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="demo-webapp" version="3.0">
+  <display-name>Demo Web Application</display-name>
+  
+  <!-- 
+  <servlet>
+    <servlet-name>velocity</servlet-name>
+    <servlet-class>
+      org.apache.velocity.tools.view.servlet.VelocityLayoutServlet
+    </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>velocity</servlet-name>
+    <url-pattern>*.vm</url-pattern>
+  </servlet-mapping>
+   -->
+  <listener>
+    <listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
+  </listener>
+  <servlet>
+    <servlet-name>helloWs</servlet-name>
+    <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>helloWs</servlet-name>
+    <url-pattern>/HelloWs</url-pattern>
+  </servlet-mapping>
+  <session-config>
+    <session-timeout>120</session-timeout>
+  </session-config>
+  <login-config>
+    <auth-method>FORM</auth-method>
+    <realm-name>Test Realm</realm-name>
+    <form-login-config>
+      <form-login-page>/login.vm</form-login-page>
+      <form-error-page>/error.vm</form-error-page>
+    </form-login-config>
+  </login-config>
+  
+  <welcome-file-list>
+  	<welcome-file>/index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>

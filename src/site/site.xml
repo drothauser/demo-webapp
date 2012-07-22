@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/DECORATION/1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
+
+	<bannerRight>
+		<name>SunJUG Demo Web Application</name>
+		<src>images/sunjug-logo.jpg</src>
+	</bannerRight>
+
+	<body>
+		<menu ref="parent" />
+
+		<menu name="Design" inherit="bottom">
+			<item name="Introduction" href="index.html" />
+			<item name="FAQ" href="faq.html" />
+		</menu>
+
+		<menu ref="modules" inherit="bottom" />
+		<menu ref="reports" inherit="bottom" />
+
+		<menu name="Code Metrics" inherit="bottom">
+			<item name="crap4j" href="crap4j-reports/index.html" collapse="true" />
+		</menu>
+
+	</body>
+
+</project>
+
+

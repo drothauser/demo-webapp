@@ -1,0 +1,36 @@
+@CHARSET "ISO-8859-1";
+
+#page {
+	width: 650px;
+	height: 99%;
+	border:1px solid black;
+	margin-left:auto;
+	margin-right:auto;
+	clear: both;	
+}
+
+#header {
+	width: 640px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-bottom: 1em;
+}
+
+#content {
+	width: 640px;	
+	margin-left:auto;
+	margin-right:auto;	
+	padding: 1em;
+}
+
+#footer {
+	width: 640px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top: 1em;
+	text-align: center;
+}
+
+.center {
+	text-align: center;	
+}

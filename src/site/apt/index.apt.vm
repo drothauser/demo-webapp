@@ -1,0 +1,18 @@
+            ------
+            SunJUG Demo Web Application Documentation
+            ------
+            Doug Rothauser
+            ------
+            2012-07-16
+
+SunJUG Demo Web Application
+
+  The purpose of this application is to demonstrate an end-to-end build pipeline using Maven, Jenkins, Git and Nexus. 
+  
+
+      
+  
+  
+    
+
+  

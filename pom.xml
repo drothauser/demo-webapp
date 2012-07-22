@@ -1,0 +1,130 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>rothsmith-common</artifactId>
+		<groupId>com.rothsmith</groupId>
+		<version>1.0.0</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>demo-webapp</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>demo-webapp Maven Webapp</name>
+
+	<ciManagement>
+		<system>Jenkins</system>
+		<url>http://jenkins.rothsmith.com/job/demo-webapp/</url>
+	</ciManagement>
+	<scm>
+		<connection>scm:svn:https://subversion.fcci-group.com/svn/test/demo-webapp</connection>
+		<developerConnection>scm:svn:https://subversion.fcci-group.com/svn/test/demo-webapp</developerConnection>
+		<url>https://subversion.fcci-group.com/svn/test/demo-webapp/</url>
+	</scm>
+	<organization>
+		<name>FCCI Insurance Group</name>
+		<url>http://rnet.fcci-group.com/informationservices/default.asp</url>
+	</organization>
+	<dependencies>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-web-api</artifactId>
+			<version>6.0</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.ws</groupId>
+			<artifactId>jaxws-rt</artifactId>
+			<version>2.2.6-2</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.seleniumhq.selenium.client-drivers</groupId>
+			<artifactId>selenium-java-client-driver</artifactId>
+			<version>1.0.2</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity-tools</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sourceforge.findbugs</groupId>
+			<artifactId>annotations</artifactId>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<finalName>demo-webapp</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+						</manifest>
+					</archive>
+					<packagingExcludes>
+						WEB-INF/lib/log4j-*.jar,
+					</packagingExcludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxws-maven-plugin</artifactId>
+				<version>1.12</version>
+				<configuration>
+					<sei>com.rothsmith.demo.ws.HelloWorldWs</sei>
+					<genWsdl>true</genWsdl>
+					<verbose>true</verbose>
+					<sourceDestDir>${project.build.directory}/generated-sources/wsgen</sourceDestDir>
+					<destDir>${project.build.directory}/jaxws/wsgen/classes</destDir>
+				</configuration>
+				<executions>
+					<execution>
+						<id>generate-wsdl</id>
+						<goals>
+							<goal>wsgen</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>com.sun.xml.ws</groupId>
+						<artifactId>jaxws-tools</artifactId>
+						<version>2.2.6-2</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

@@ -1,0 +1,10 @@
+<html>
+	<head>
+		<title>User Information</title>
+	</head>
+	<body>
+	
+		Welcome $request.getRemoteUser()!
+
+	</body>
+</html>

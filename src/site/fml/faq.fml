@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faqs xmlns="http://maven.apache.org/FML/1.0.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/FML/1.0.1 http://maven.apache.org/xsd/fml-1.0.1.xsd"
+	title="Frequently Asked Questions" toplink="false">
+
+	<part id="general">
+		<title>General</title>
+
+		<faq id="how-build">
+			<question>
+				How do I build the demo-webapp project?
+      		</question>
+			<answer>
+				<p>The project can be built using the following Maven command from
+					the project's root directory':</p>
+
+				<ol>
+					<li>Build: mvn install</li>
+					<li>Generate documentation site: mvn site</li>
+				</ol>
+				
+			</answer>
+		</faq>
+	</part>
+
+</faqs>
