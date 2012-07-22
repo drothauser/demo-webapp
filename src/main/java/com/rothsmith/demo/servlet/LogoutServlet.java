@@ -52,21 +52,33 @@ public final class LogoutServlet
 
 		HttpSession session = request.getSession(false);
 		if (session != null) {
-			// session.invalidate();
 			request.logout();
-			Cookie[] cookies = request.getCookies();
-			if (cookies != null) {
-				for (int i = 0; i < cookies.length; i++) {
-					cookies[i].setValue("");
-					cookies[i].setPath("/");
-					cookies[i].setMaxAge(0);
-					response.addCookie(cookies[i]);
-				}
-			}
+			removeCookies(request, response);
 		}
 
 		response.sendRedirect("");
 
+	}
+
+	/**
+	 * This method removes all cookies from the session.
+	 * 
+	 * @param request
+	 *            {@link HttpServletRequest}
+	 * @param response
+	 *            {@link HttpServletResponse}
+	 */
+	private void removeCookies(HttpServletRequest request,
+	    HttpServletResponse response) {
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for (int i = 0; i < cookies.length; i++) {
+				cookies[i].setValue("");
+				cookies[i].setPath("/");
+				cookies[i].setMaxAge(0);
+				response.addCookie(cookies[i]);
+			}
+		}
 	}
 
 	/**
