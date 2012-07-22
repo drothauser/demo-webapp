@@ -1,2 +1,6 @@
 /workspaces
 /target
+/pom.xml.next
+/pom.xml.releaseBackup
+/release.properties
+/pom.xml.tag
