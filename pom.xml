@@ -16,13 +16,13 @@
 		<url>http://jenkins.rothsmith.com/job/demo-webapp/</url>
 	</ciManagement>
 	<scm>
-		<connection>scm:svn:https://subversion.fcci-group.com/svn/test/demo-webapp</connection>
-		<developerConnection>scm:svn:https://subversion.fcci-group.com/svn/test/demo-webapp</developerConnection>
-		<url>https://subversion.fcci-group.com/svn/test/demo-webapp/</url>
+		<connection>scm:git:git://github.com/drothauser/demo-webapp.git</connection>
+		<developerConnection>scm:git:git@github.com:drothauser/demo-webapp.git</developerConnection>
+		<url>https://github.com/drothauser/demo-webapp.git</url>
 	</scm>
 	<organization>
-		<name>FCCI Insurance Group</name>
-		<url>http://rnet.fcci-group.com/informationservices/default.asp</url>
+		<name>Rothsmith LLC</name>
+		<url>http://www.rothsmith.com</url>
 	</organization>
 	<dependencies>
 		<dependency>
@@ -127,4 +127,6 @@
 		</plugins>
 	</build>
 
+	<inceptionYear>2012</inceptionYear>
+	<description>Web application to demonstrate Jenkins build pipelines.</description>
 </project>
