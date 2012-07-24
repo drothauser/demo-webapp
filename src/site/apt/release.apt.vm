@@ -44,10 +44,13 @@ Maven and Jenkins Release Configuration
 	The following Maven command will be used the Jenkins release job. Notice the use of the 
 	<<-DpreparationGoals=package -Darguments="-DskipTests=true">> parameter. It is used to 
 	prevent the clean phase from being run which would have deleted all unit, integration and code metric reports.
-	That would have necessitated them to be run again in the subsequent release:perform goal.	 
+	That would have necessitated them to be run again in the subsequent release:perform goal.
+	
+	Also note the <<-B>> parameter. It turns off <interactive> mode prompting and runs the release:prepare goal
+	in batch mode causing all default release numbers to be used. 	 
 
 +-------------------------------------------------------------------------------
-mvn -DpreparationGoals=package -Darguments="-DskipTests=true" release:prepare
+mvn -B -DpreparationGoals=package -Darguments="-DskipTests=true" release:prepare
 +-------------------------------------------------------------------------------
 
 *** Release Perform
