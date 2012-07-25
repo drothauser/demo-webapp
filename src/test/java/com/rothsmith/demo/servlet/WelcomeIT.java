@@ -105,6 +105,7 @@ public final class WelcomeIT
 
 	}
 
+	// START SNIPPET: loginToWebApplication
 	/**
 	 * Test logging in.
 	 * 
@@ -127,6 +128,8 @@ public final class WelcomeIT
 
 		return selenium.isTextPresent("Welcome");
 	}
+
+	// END SNIPPET: loginToWebApplication
 
 	/**
 	 * Test logging out.

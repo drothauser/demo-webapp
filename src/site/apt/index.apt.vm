@@ -21,14 +21,31 @@ Introducing the Build Pipeline
 	but one common principle is that specific versions of your software are selected, 
 	according to certain quality-related criteria, to be "promoted" to the next stage of the life cycle. 
 	This is known as build promotion, and the broader process is known as a build pipeline.
+	
+* Jenkins Build Pipeline Plugin
+
+	This plugin renders upstream and downstream connected jobs that typically form a build pipeline.  
+	In addition, it offers the ability to define manual triggers for jobs that require intervention prior to 
+	execution, e.g. an approval process outside of Jenkins.  Using the <Jenkins Build Pipeline> plugin will enable 
+	your Continuous Integration environment to become the centerpiece of your deployment pipeline, 
+	orchestrating the promotion of a version of software through quality gates and into production. 
+	By extending the concepts of CI you can create a chain of jobs each one subjecting your build to 
+	quality assurance steps. These QA steps may be a combination of manual and automated steps. 
+	Once a build has passed all these, it can be automatically deployed into production.
  
 * Maven Release Plugin
 	
 	An important part of any build pipeline is a well-defined release strategy. This involves, among other things, 
 	deciding how and when to cut a new release, and how to identify it with a unique label or version number. 
 	If you are working with Maven projects, using the Maven Release plugin to handle version numbers 
-	comes as a highly recommended practice.
+	comes as a highly recommended practice.  
+	
+* Jenkins M2 Release Plugin
 
+	This plugin allows you to perform a release build using the maven-release-plugin from within Jenkins thus
+	simplifying the process to run Maven release goals.
+	
+[./images/jenkins-m2release.jpg] Jenkins M2 Release Plugin Example
   
   
 * Example Build Pipeline
@@ -94,6 +111,7 @@ Introducing the Build Pipeline
 	
 	[]
   
+[./images/jenkins-build-pipeline.jpg] Example Jenkins Build Pipeline
   
   
   

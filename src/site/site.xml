@@ -19,6 +19,7 @@
 		<menu name="Design" inherit="bottom">
 			<item name="Introduction" href="index.html" />
 			<item name="Release Configuration" href="release.html" />
+			<item name="Automated Web Testing" href="webinttest.html" />
 			<item name="FAQ" href="faq.html" />
 		</menu>
 
