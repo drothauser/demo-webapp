@@ -128,4 +128,5 @@
 
 	<inceptionYear>2012</inceptionYear>
 	<description>Web application to demonstrate Jenkins build pipelines.</description>
+	<url>http://www.rothsmith.com:8080/demo-webapp/</url>
 </project>
