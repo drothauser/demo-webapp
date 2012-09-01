@@ -8,7 +8,7 @@
 	<artifactId>demo-webapp</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.25-SNAPSHOT</version>
-	<name>demo-webapp Maven Webapp</name>
+	<name>demo-webapp</name>
 
 	<ciManagement>
 		<system>Jenkins</system>
