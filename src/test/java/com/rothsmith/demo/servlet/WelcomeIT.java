@@ -68,7 +68,8 @@ public final class WelcomeIT
 	 */
 	@Parameters
 	public static Collection<Object[]> browsers() {
-		Object[][] data = new Object[][] { { "*iexplore" }, { "*firefox" } };
+		// Object[][] data = new Object[][] { { "*iexplore" }, { "*firefox" } };
+		Object[][] data = new Object[][] { { "*iexplore" } };
 		return Arrays.asList(data);
 	}
 
