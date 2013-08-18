@@ -6,7 +6,7 @@
 
 <ul>
 	<li><a href="welcome.vm">User Information</a></li>
-	<li><a href="HelloWs">JAX-WS WebService</a></li>
+	
 </ul>
 </body>
 </html>
