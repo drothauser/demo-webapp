@@ -1,0 +1,12 @@
+<html>
+<head>
+<title>Demo Web Application</title>
+</head>
+<body>
+
+<ul>
+	<li><a href="welcome.vm">User Information</a></li>
+	
+</ul>
+</body>
+</html>

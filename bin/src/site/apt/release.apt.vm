@@ -1,0 +1,78 @@
+            ------
+            SunJUG Demo Web Application Documentation
+            ------
+            Doug Rothauser
+            ------
+            2012-07-16
+
+Maven and Jenkins Release Configuration
+
+  The following outlines the Maven release commands and Jenkins release job configuration.
+  
+
+* Maven Release Plugin
+	
+	If you are working with Maven projects, using the Maven Release plugin to handle version numbers 
+	comes as a highly recommended practice.
+	
+** Maven Release Commands
+
+*** Release Prepare
+
+	The release:prepare goal steps through several phases to ensure the POM is ready to be released and 
+	then prepares SCM to eventually contain a tagged version of the release and a record in the local 
+	copy of the parameters used.
+
+	* Checks to make sure that there are no uncommitted changes.
+	
+	* Ensures that there are no SNAPSHOT dependencies in the POM file.
+	
+	* Changes the version of the application and removes SNAPSHOT from the version i.e. 1.0.3-SNAPSHOT becomes 1.0.3.
+	
+	* Run project tests against modified POMs. Note that this step can be bypassed if the tests were run by a  
+	prior Maven command. To accomplish this, you'll have to provide the preparationGoals parameter to override the 
+	the default clean and package goals.
+	
+	* Commit the modified POM.
+	
+	* Tag the code in your VCS e.g. Subversion, Git, etc.
+	
+	* Increment the version number and append SNAPSHOT i.e. 1.0.3 becomes 1.0.4-SNAPSHOT
+	
+	* Commit modified POM.
+	
+	The following Maven command will be used the Jenkins release job. Notice the use of the 
+	<<-DpreparationGoals=package -Darguments="-DskipTests=true">> parameter. It is used to 
+	prevent the clean phase from being run which would have deleted all unit, integration and code metric reports.
+	That would have necessitated them to be run again in the subsequent release:perform goal.
+	
+	Also note the <<-B>> parameter. It turns off <interactive> mode prompting and runs the release:prepare goal
+	in batch mode causing all default release numbers to be used. 	 
+
++-------------------------------------------------------------------------------
+mvn -B -DpreparationGoals=package -Darguments="-DskipTests=true" release:prepare
++-------------------------------------------------------------------------------
+
+*** Release Perform
+
+	Performing a release runs the following release phases:
+	
+	* Checkout from an SCM URL with optional tag
+	
+	* Run the predefined Maven goals to release the project (by default, deploy site-deploy)
+	
+	The following Maven command will also be used the Jenkins release job. Notice the use of the 
+	<<-Darguments="-Dmaven.test.skip=true">> parameter. It is used to 
+	prevent the unnecessary test phase from occurring in the deploy phase.
+
++-------------------------------------------------------------------------------
+mvn -Darguments="-DskipTests=true" release:perform
++-------------------------------------------------------------------------------
+ 
+ 	Note that the Maven source:jar, source:test-jar, javadoc:jar and javadoc:test-jar goals have been 
+ 	bound to the deploy phase via the rothsmith-common parent pom. This will result in the source code jars
+ 	and Javadoc jars being deployed to the Nexus Repository.  
+  
+* Jenkins Release Job Configuration
+
+	

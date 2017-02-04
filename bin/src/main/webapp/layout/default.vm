@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=8">
+	<title>$!page_title</title>
+	<link rel="StyleSheet" href="css/style.css" type="text/css" />
+</head>
+<body>
+	<div id="page">
+	<div id="header">
+		<div style="float:left">
+			<img alt="Sarasota Java Users Group" src="images/sunjug-logo.jpg">
+		</div>
+		<div style="float:left; margin-left:3em;">
+			<h2>Demo Web Application</h2>
+		</div>
+		<div style="text-align:right;clear:both">
+			<a href="index.vm">Home</a>
+			#if ($!request.getRemoteUser())
+				<a href="logout">Logout</a>
+			#end
+		</div>
+	</div>
+	<div id="content">$screen_content</div>
+	<div id="footer">#parse('footer.vm')</div>
+	</div>
+</body>
+</html>

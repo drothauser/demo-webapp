@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="WebContent"/>
+	<classpathentry kind="src" path="webapp"/>
+	<classpathentry kind="lib" path="src/main/webapp/js/jquery-2.1.4.js"/>
+	<classpathentry kind="lib" path="src/main/webapp/js/party-functions.js"/>
+	<classpathentry kind="lib" path="src/main/webapp/js/president-functions.js"/>
+	<classpathentry kind="lib" path="src/main/webapp/js/state-functions.js"/>
 	<classpathentry kind="con" path="org.eclipse.wst.jsdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.wst.jsdt.launching.WebProject">
 		<attributes>

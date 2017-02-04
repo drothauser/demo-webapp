@@ -1,0 +1,124 @@
+            ------
+            SunJUG Demo Web Application Documentation
+            ------
+            Doug Rothauser
+            ------
+            2012-07-16
+
+SunJUG Demo Web Application
+
+  The purpose of this application is to provide a simple web application for demonstrating an end-to-end build pipeline using Maven, Jenkins, Git and Nexus. 
+  
+Introducing the Build Pipeline
+
+	Continuous Integration is not just about automatically building and testing software, but can also 
+	help in the broader context of the software product development and release life cycle. 
+	In many organizations, the life of a particular version of an application or product starts out in development. 
+	When it is deemed ready, it is passed on to a QA team for testing. 
+	If they consider the version acceptable, they pass it on to selected users for more testing in a 
+	User Acceptance Testing (UAT) environment. And if the users are happy, it is shipped out into production. 
+	Of course, there are almost as many variations on this as there are software development teams, 
+	but one common principle is that specific versions of your software are selected, 
+	according to certain quality-related criteria, to be "promoted" to the next stage of the life cycle. 
+	This is known as build promotion, and the broader process is known as a build pipeline.
+	
+* Jenkins Build Pipeline Plugin
+
+	This plugin renders upstream and downstream connected jobs that typically form a build pipeline.  
+	In addition, it offers the ability to define manual triggers for jobs that require intervention prior to 
+	execution, e.g. an approval process outside of Jenkins.  Using the <Jenkins Build Pipeline> plugin will enable 
+	your Continuous Integration environment to become the centerpiece of your deployment pipeline, 
+	orchestrating the promotion of a version of software through quality gates and into production. 
+	By extending the concepts of CI you can create a chain of jobs each one subjecting your build to 
+	quality assurance steps. These QA steps may be a combination of manual and automated steps. 
+	Once a build has passed all these, it can be automatically deployed into production.
+ 
+* Maven Release Plugin
+	
+	An important part of any build pipeline is a well-defined release strategy. This involves, among other things, 
+	deciding how and when to cut a new release, and how to identify it with a unique label or version number. 
+	If you are working with Maven projects, using the Maven Release plugin to handle version numbers 
+	comes as a highly recommended practice.  
+	
+* Jenkins M2 Release Plugin
+
+	This plugin allows you to perform a release build using the maven-release-plugin from within Jenkins thus
+	simplifying the process to run Maven release goals.
+	
+[./images/jenkins-m2release.jpg] Jenkins M2 Release Plugin Example
+  
+  
+* Example Build Pipeline
+
+	The following Jenkins jobs are orchestrated into the build pipeline:
+  
+   * Testing:
+
+   		The application must be tested before it can be deployed to any environment. 
+   		These steps insure that the application passes unit testing and functional/integration
+   		testing phases.
+   
+   		* Build project to create WAR file used in subsequents steps.
+   
+		* Unit Tests
+		
+		* Automated Integration/Functional Testing
+		
+		[]
+		
+		[]
+		
+
+	* Static Code Analysis:
+	
+		Run all code quality metric tests. Set thresholds on key metrics such as cyclomatic 
+		complexity and high risk vulnerabilies for example security issues, failure to close streams, etc.
+		This step will utilize a Jenkins job that runs the Maven site lifecycle phase. This goal accomplishes
+		two tasks: 		
+	
+		* Runs all static code code analysis tests.
+		
+		* Generates application documentation site. This will be published to a web server in the release step
+		provided that the application passes subsequent QA and UAT testing.
+		
+		[]
+		
+		[]
+	
+	* Deploy to QA:
+	
+		If the application passes all unit, integration and code metric tests, it will be automatically deployed to the QA environment.
+		It is in this environment that the QA team test the application. If they consider the version acceptable, they pass
+		it on to selected users for more testing in a User Acceptance Testing (UAT) environment.
+	
+	* Deploy to UAT
+	
+		If the application passes QA testing, it will be deployed to the UAT environment and tested by a select group of
+		users.  Note that the UAT deployment job will be triggered manually by the production control or release management team.
+	
+	* Release:
+	
+		* Change the version in the POMs from x-SNAPSHOT to a new version.
+		
+		* Use Sonar plugin to report code quality to Sonar.
+		
+		[]
+		
+		[]
+		
+	
+	* Deploy to Production
+	
+	[]
+  
+[./images/jenkins-build-pipeline.jpg] Example Jenkins Build Pipeline
+  
+  
+  
+
+      
+  
+  
+    
+
+  

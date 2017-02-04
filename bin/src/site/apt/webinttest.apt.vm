@@ -1,0 +1,52 @@
+            ------
+            SunJUG Demo Web Application Documentation
+            ------
+            Doug Rothauser
+            ------
+            2012-07-16
+
+Automated Web Application Integration Testing
+
+  This project uses the Failsafe, Selenium, and Jetty plugins to perform automated web site testing.
+  Maven profiles help in encapsulating the build phases and goals necessary to bootstrap the web container and 
+  Selenium Remote Control tool. 
+  
+  * Launching the embedded Jetty web container with JaCoCo code coverage:
+  
+    The Jetty web container must be launched in a separate step before integration tests can be run. Also,
+    JaCoCo must be configured as a JVM agent for the Jetty instance in order for <on-the-fly> code coverage
+    to take place. The <web-it-coverage-init> profile is used to encapsulate all the build steps necessary
+    to accomplish this.
+
+	<Maven goals:>
+	
++-----------------------------------------------------
+pre-integration-test -P web-it-coverage-init -T 4
++-----------------------------------------------------  
+
+  <pre-integration-test profile:>
+  
+%{code-snippet|id=web-it-coverage-init|file=src/site/resources/snippets/profile-snippets.xml}
+
+	* Running the web integration tests:
+  
+    The <web-it-coverage> implements the Maven verify phase is invoked to run the Failsafe plugin goals.
+    This profile also runs the Selenium Remote Control server to test the application using Internet Explorer
+    and FireFox browsers.  The profile also stops the Jetty and Selenium servers when testing has completed. 
+
+	<Maven goals:>
+	
++-----------------------------------------------------
+verify -P web-it-coverage -T 4
++-----------------------------------------------------  
+
+  <web-it-coverage profile:>
+  
+%{code-snippet|id=web-it-coverage|file=src/site/resources/snippets/profile-snippets.xml}
+
+  * JUnit Code to run Selenium tests for IE and Firefox:
+  
+%{code-snippet|id=loginToWebApplication|file=src/test/java/com/rothsmith/demo/servlet/WelcomeIT.java|code=java}
+  
+%{enable-highlighter|url=http://syntax-highlighted-snippet.googlecode.com/svn/public}
+	
