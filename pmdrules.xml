@@ -107,7 +107,6 @@
 	<rule ref="rulesets/java/finalizers.xml/EmptyFinalizer" />
 	<rule ref="rulesets/java/basic.xml/EmptyFinallyBlock" />
 	<!-- <rule ref="rulesets/vm/basic.xml/EmptyForeachStmt" /> -->
-	<rule ref="rulesets/java/basic.xml/EmptyIfStmt" />
 	<!-- <rule ref="rulesets/vm/basic.xml/EmptyIfStmt" /> -->
 	<rule ref="rulesets/java/basic.xml/EmptyInitializer" />
 	<rule

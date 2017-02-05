@@ -3,7 +3,7 @@
  */
 package com.rothsmith.demo.servlet;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.Arrays;
@@ -110,9 +110,10 @@ public final class WelcomeIT {
 		capabilities.setCapability(
 		    InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,
 		    true);
-		File file = new File("D:\\java\\IEDriverServer.exe");
+		File file = new File(getClass().getClassLoader()
+		    .getResource("IEDriverServer.exe").getFile());
 		System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
-		capabilities.setCapability("requireWindowFocus", true);		
+		capabilities.setCapability("requireWindowFocus", true);
 		driver = new InternetExplorerDriver(capabilities);
 
 	}
@@ -143,7 +144,8 @@ public final class WelcomeIT {
 		LOGGER.debug(driver.getPageSource());
 
 		// selenium.click("link=User Information");
-		WebElement findElement = driver.findElement(By.linkText("User Information"));
+		WebElement findElement =
+		    driver.findElement(By.linkText("User Information"));
 		findElement.click();
 
 		// selenium.waitForPageToLoad("30000");
@@ -152,7 +154,7 @@ public final class WelcomeIT {
 		// selenium.type("j_password", "admin123");
 		// selenium.click("//input[@type='submit' and @value='Submit']");
 
-		WebDriverWait wait = new WebDriverWait(driver, 5);		
+		WebDriverWait wait = new WebDriverWait(driver, 5);
 		WebElement username = driver.findElement(By.name("j_username"));
 		wait.until(ExpectedConditions.urlMatches(".*login.*"));
 		username.sendKeys("admin");
@@ -161,7 +163,7 @@ public final class WelcomeIT {
 		password.submit();
 
 		// selenium.waitForPageToLoad("30000");
-		//wait.until(ExpectedConditions.titleContains("User Information"));
+		// wait.until(ExpectedConditions.titleContains("User Information"));
 		wait.until(ExpectedConditions.urlMatches(".*welcome.*"));
 
 		LOGGER.debug(driver.getPageSource());
