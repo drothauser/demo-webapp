@@ -1,4 +1,4 @@
-activeProfiles=
+activeProfiles=web-it-coverage-init, web-it-coverage
 eclipse.preferences.version=1
 resolveWorkspaceProjects=true
 version=1

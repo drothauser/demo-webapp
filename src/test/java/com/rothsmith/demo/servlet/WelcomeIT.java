@@ -3,6 +3,9 @@
  */
 package com.rothsmith.demo.servlet;
 
+import static org.junit.Assert.*;
+
+import java.io.File;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -12,10 +15,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.thoughtworks.selenium.SeleneseTestCase;
+// import com.thoughtworks.selenium.SeleneseTestCase;
 
 import edu.umd.cs.findbugs.annotations.SuppressWarnings;
 
@@ -32,14 +42,14 @@ import edu.umd.cs.findbugs.annotations.SuppressWarnings;
  * 
  */
 @RunWith(Parameterized.class)
-public final class WelcomeIT
-        extends SeleneseTestCase {
+public final class WelcomeIT {
+	// extends SeleneseTestCase {
 
 	/**
 	 * SLF4J Logger for WelcomeIT.
 	 */
-	private static final Logger LOGGER = LoggerFactory
-	    .getLogger(WelcomeIT.class);
+	private static final Logger LOGGER =
+	    LoggerFactory.getLogger(WelcomeIT.class);
 
 	/**
 	 * Web container port number.
@@ -60,6 +70,8 @@ public final class WelcomeIT
 	 * Browser to use for the test.
 	 */
 	private final String browser;
+
+	private WebDriver driver;
 
 	/**
 	 * Collection of browser types to test with.
@@ -91,7 +103,18 @@ public final class WelcomeIT
 	    + "setup() steps on SeleneseTestCase initializaton")
 	public void setUp() throws Exception {
 
-		setUp(URL, browser);
+		// setUp(URL, browser);
+
+		DesiredCapabilities capabilities =
+		    DesiredCapabilities.internetExplorer();
+		capabilities.setCapability(
+		    InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,
+		    true);
+		File file = new File("D:\\java\\IEDriverServer.exe");
+		System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
+		capabilities.setCapability("requireWindowFocus", true);		
+		driver = new InternetExplorerDriver(capabilities);
+
 	}
 
 	/**
@@ -114,20 +137,37 @@ public final class WelcomeIT
 	 */
 	private boolean loginToWebApplication() {
 
-		selenium.open(URL);
+		// selenium.open(URL);
+		driver.navigate().to(URL);
 
-		LOGGER.debug(selenium.getHtmlSource());
+		LOGGER.debug(driver.getPageSource());
 
-		selenium.click("link=User Information");
-		selenium.waitForPageToLoad("30000");
-		selenium.type("j_username", "admin");
-		selenium.type("j_password", "admin123");
-		selenium.click("//input[@type='submit' and @value='Submit']");
-		selenium.waitForPageToLoad("30000");
+		// selenium.click("link=User Information");
+		WebElement findElement = driver.findElement(By.linkText("User Information"));
+		findElement.click();
 
-		LOGGER.debug(selenium.getHtmlSource());
+		// selenium.waitForPageToLoad("30000");
 
-		return selenium.isTextPresent("Welcome");
+		// selenium.type("j_username", "admin");
+		// selenium.type("j_password", "admin123");
+		// selenium.click("//input[@type='submit' and @value='Submit']");
+
+		WebDriverWait wait = new WebDriverWait(driver, 5);		
+		WebElement username = driver.findElement(By.name("j_username"));
+		wait.until(ExpectedConditions.urlMatches(".*login.*"));
+		username.sendKeys("admin");
+		WebElement password = driver.findElement(By.name("j_password"));
+		password.sendKeys("admin123");
+		password.submit();
+
+		// selenium.waitForPageToLoad("30000");
+		//wait.until(ExpectedConditions.titleContains("User Information"));
+		wait.until(ExpectedConditions.urlMatches(".*welcome.*"));
+
+		LOGGER.debug(driver.getPageSource());
+
+		// return selenium.isTextPresent("Welcome");
+		return true;
 	}
 
 	// END SNIPPET: loginToWebApplication
@@ -138,27 +178,34 @@ public final class WelcomeIT
 	 * @return true if successful, else false.
 	 */
 	private boolean logoutFromWebApplication() {
-		selenium.click("link=Logout");
-		selenium.waitForPageToLoad("10000");
+		// selenium.click("link=Logout");
 
-		LOGGER.debug(selenium.getHtmlSource());
+		WebElement logoutLink = driver.findElement(By.linkText("Logout"));
+		logoutLink.click();
 
-		return selenium.isTextPresent("User Info");
+		// selenium.waitForPageToLoad("10000");
+		WebDriverWait wait = new WebDriverWait(driver, 5);
+
+		wait.until(ExpectedConditions.urlMatches(".*/demo-webapp.*"));
+
+		LOGGER.debug(driver.getPageSource());
+
+		// return selenium.isTextPresent("User Info");
+		return true;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
 	@After
 	@SuppressWarnings(value = "IJU_TEARDOWN_NO_SUPER", justification = "super."
 	    + "teardown() steps on SeleneseTestCase initializaton")
-	public void tearDown() throws Exception {
+	public void tearDown() {
 
-		selenium.close();
-		selenium.stop();
+		driver.close();
 
-		super.tearDown();
+		// selenium.close();
+		// selenium.stop();
 
 	}
 

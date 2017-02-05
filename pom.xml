@@ -49,10 +49,19 @@
 			<artifactId>slf4j-log4j12</artifactId>
 		</dependency>
 
+		<!-- <dependency> <groupId>org.seleniumhq.selenium.client-drivers</groupId> 
+			<artifactId>selenium-java-client-driver</artifactId> <version>1.0.2</version> 
+			<scope>test</scope></dependency> -->
 		<dependency>
-			<groupId>org.seleniumhq.selenium.client-drivers</groupId>
-			<artifactId>selenium-java-client-driver</artifactId>
-			<version>1.0.2</version>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<!-- <version>2.53.1</version> -->
+			<!-- 19/October.2016 have upgraded to 3.0.1 for MyFirstTest -->
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-ie-driver</artifactId>			
 			<scope>test</scope>
 		</dependency>
 
